@@ -1,11 +1,10 @@
-package com.example;
+package com.guiltTripper;
 
-import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("example")
-public interface ExampleConfig extends Config
+@ConfigGroup("guiltTripper")
+public interface Config extends net.runelite.client.config.Config
 {
 	@ConfigItem(
 		keyName = "greeting",
