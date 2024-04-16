@@ -1,2 +1,1 @@
-# Example
-An example greeter plugin
+Guilt tripper is a Runelite plugin designed for Runescape, adding a unique twist to the gaming experience. The plugin periodically sends messages to players, humorously "accusing" them of playing too much and suggesting they take a break.
