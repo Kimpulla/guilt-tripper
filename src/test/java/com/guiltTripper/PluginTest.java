@@ -7,7 +7,7 @@ public class PluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(Plugin.class);
+		ExternalPluginManager.loadBuiltin(GuiltTripperPlugin.class);
 		RuneLite.main(args);
 	}
 }
