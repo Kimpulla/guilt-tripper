@@ -11,7 +11,6 @@ public class BossName {
         NPC_NAMES.add("Alchemical Hydra");
         NPC_NAMES.add("Artio");
         NPC_NAMES.add("Callisto");
-
         NPC_NAMES.add("Cerberus");
         NPC_NAMES.add("Chaos Elemental");
         NPC_NAMES.add("Chaos Fanatic");
