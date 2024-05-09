@@ -1,6 +1,6 @@
 # Guilt Tripper - Runelite Plugin
 
-Guilt Tripper is a Runelite plugin designed for Runescape, adding a unique twist to the gaming experience. This plugin periodically sends messages to players, humorously "accusing" them of playing too much and suggesting they take a break.
+Guilt Tripper is a Runelite plugin designed for Runescape, adding a unique twist to the gaming experience. This plugin periodically sends messages to players, humorously "accusing" them of playing too much and suggesting they take a break. And much more!
 
 ## Used Sounds
 
