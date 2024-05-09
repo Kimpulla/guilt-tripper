@@ -1,5 +1,6 @@
 package com.guiltTripper;
 
+// Sound effect messages.
 public class GuiltTripperMessages {
     public static final String[] MESSAGES = {
             "Touch grass!",

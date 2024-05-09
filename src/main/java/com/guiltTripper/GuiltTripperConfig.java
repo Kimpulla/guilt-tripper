@@ -28,6 +28,6 @@ public interface GuiltTripperConfig extends Config {
 			max = 100
 	)
 	default int soundVolume() {
-		return 50; // Oletusarvo 50%, voidaan muuttaa haluamaksesi
+		return 50; // By default, set to 50%
 	}
 }

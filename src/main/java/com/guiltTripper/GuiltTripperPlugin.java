@@ -15,7 +15,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 import javax.sound.sampled.FloatControl;
 
-
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,10 +47,11 @@ public class GuiltTripperPlugin extends Plugin {
 
 	@Override
 	protected void startUp() throws Exception {
-		System.out.println("Guilt Tripper started!");
+		//System.out.println("Guilt Tripper started!");
 		startTimer();
 	}
 
+	// Starts timer after startup.
 	private void startTimer() {
 		if (timer != null) {
 			timer.cancel();
@@ -88,34 +88,38 @@ public class GuiltTripperPlugin extends Plugin {
 		}
 	}
 
+	// Prints random message.
 	private void printRandomMessage() {
 		String randomMessage = "<col=ff0000>" + messages[random.nextInt(messages.length)] + "</col>";
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", randomMessage, null);
 	}
 
+	// Prints specific message.
 	private void printSpecificMessage(String message) {
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>" + message + "</col>", null);
 	}
 
+	// By default = null.
 	private Clip clip = null;
 
+	// Plays sound.
 	private void playSound() {
-		if (!config.allowSound()) {  // Tarkista, ovatko äänet sallittuja
-			return;  // Jos ei, lopeta metodi tässä
+		if (!config.allowSound()) {  // Check, if sound is allowed.
+			return;
 		}
 
 		if (clip != null) {
 			clip.close();
-			clip = null;  // Aseta clip nulliksi suljetun klipin jälkeen
+			clip = null;  // Set Clip to null after closing it.
 		}
 
-		// Lista äänitiedostoista
+		// List of sound effects.
 		String[] sounds = {"laughter.wav", "ba-dum-tishh.wav", "oldman.wav", "ooouuh.wav", "sneeze.wav", "trumpet.wav"};
 		Random random = new Random();
-		int index = random.nextInt(sounds.length);  // Valitse satunnainen indeksi
+		int index = random.nextInt(sounds.length);  // Random index.
 
 		try {
-			// Ladataan satunnainen ääni resurssina
+			// Download random sound effect.
 			URL soundUrl = getClass().getResource("/" + sounds[index]);
 			System.out.println("mika aani: "+ soundUrl);
 			if (soundUrl == null) {
@@ -125,7 +129,7 @@ public class GuiltTripperPlugin extends Plugin {
 			try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl)) {
 				clip = AudioSystem.getClip();
 				clip.open(audioIn);
-				setVolume(clip, config.soundVolume()); // Käytä konfiguraation äänenvoimakkuutta
+				setVolume(clip, config.soundVolume()); // Use users set volume.
 				clip.start();
 			}
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -134,7 +138,7 @@ public class GuiltTripperPlugin extends Plugin {
 	}
 
 
-	// Apumetodi äänenvoimakkuuden asettamiseksi
+	// Volume modification.
 	private void setVolume(Clip clip, int volume) {
 		if (volume < 0 || volume > 100) {
 			throw new IllegalArgumentException("Volume must be between 0 and 100");
@@ -144,19 +148,12 @@ public class GuiltTripperPlugin extends Plugin {
 		float minDb = gainControl.getMinimum(); // esim. -80 dB tai vastaava
 		float maxDb = gainControl.getMaximum(); // +6.0206 dB
 
-		// Lasketaan dB arvo lineaarisesti volume prosentin perusteella
+		// dB value linearly.
 		float gain = ((maxDb - minDb) * (volume / 100.0f)) + minDb;
 		gainControl.setValue(gain);
 
 		System.out.println("Volume set to " + volume + "% (" + gain + " dB)");
 	}
-
-
-
-
-
-
-
 
 	@Provides
 	GuiltTripperConfig provideConfig(ConfigManager configManager) {
