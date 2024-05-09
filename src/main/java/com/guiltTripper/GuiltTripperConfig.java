@@ -10,7 +10,7 @@ public interface GuiltTripperConfig extends Config {
 
 	@ConfigItem(
 			keyName = "allowSound",
-			name = "Allow Sound",
+			name = "Sounds",
 			description = "Enable or disable sound effects"
 	)
 	default boolean allowSound() {
