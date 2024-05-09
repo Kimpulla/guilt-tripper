@@ -69,7 +69,7 @@ public class GuiltTripperPlugin extends Plugin {
 					});
 				}
 			}
-		}, 10 * 1000, 10 * 1000); // 10 seconds
+		}, 15 * 60 * 1000, 15 * 60 * 1000); // 10 seconds
 	}
 
 	@Override
@@ -121,7 +121,6 @@ public class GuiltTripperPlugin extends Plugin {
 		try {
 			// Download random sound effect.
 			URL soundUrl = getClass().getResource("/" + sounds[index]);
-			System.out.println("mika aani: "+ soundUrl);
 			if (soundUrl == null) {
 				System.out.println("Sound file not found!");
 				return;
