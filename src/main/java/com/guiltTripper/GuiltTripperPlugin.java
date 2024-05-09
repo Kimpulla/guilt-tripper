@@ -83,7 +83,7 @@ public class GuiltTripperPlugin extends Plugin {
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
-			printSpecificMessage("Take the following message with a grain of salt...");
+			printDefaultMessages("Take the following message with a grain of salt...");
 			startTimer();
 		}
 	}
@@ -91,29 +91,37 @@ public class GuiltTripperPlugin extends Plugin {
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned event) {
 		NPC npc = event.getNpc();
-		if (BossName.NPC_NAMES.contains(npc.getName()) && npc.getHealthRatio() == 0) {
-			printSpecificMessage("You have a funny feeling like you're being followed.");
+		int dropChance = BossDropRate.getDropRate(npc.getName());
 
-			// Create a new timer to handle delayed message display
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					clientThread.invokeLater(() -> {
-						printSpecificMessage("Turns out it was just a lost kitten.");
-					});
-				}
-			}, 5000);  // Delay of 5000 milliseconds (5 seconds)
+		if (BossName.NPC_NAMES.contains(npc.getName()) && npc.getHealthRatio() == 0) {
+			if (random.nextInt(dropChance) == 0) {
+				printSpecificMessage("You have a funny feeling like you're being followed.");
+
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						clientThread.invokeLater(() -> {
+							printSpecificMessage("Turns out it was just a lost kitten.");
+						});
+					}
+				}, 5000);
+			}
 		}
 	}
 
 
+
 	private void printRandomMessage() {
-		String randomMessage = "<col=ff0000>" + messages[random.nextInt(messages.length)] + "</col>";
+		String randomMessage = "<col=00ff00>" + messages[random.nextInt(messages.length)] + "</col>";
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", randomMessage, null);
 	}
 
 	private void printSpecificMessage(String message) {
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>" + message + "</col>", null);
+	}
+
+	private void printDefaultMessages(String message) {
+		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=000000>" + message + "</col>", null);
 	}
 
 	private void playSound() {
