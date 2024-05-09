@@ -105,7 +105,6 @@ public class GuiltTripperPlugin extends Plugin {
 
 	private Clip clip = null;
 
-	// TODO: LISÄÄ ÄÄNIÄ
 	private void playSound() {
 		if (!config.allowSound()) {  // Tarkista, ovatko äänet sallittuja
 			return;  // Jos ei, lopeta metodi tässä
@@ -115,9 +114,16 @@ public class GuiltTripperPlugin extends Plugin {
 			clip.close();
 			clip = null;  // Aseta clip nulliksi suljetun klipin jälkeen
 		}
+
+		// Lista äänitiedostoista
+		String[] sounds = {"laughter.wav", "ba-dum-tishh.wav", "oldman.wav", "ooouuh.wav", "sneeze.wav", "trumpet.wav"};
+		Random random = new Random();
+		int index = random.nextInt(sounds.length);  // Valitse satunnainen indeksi
+
 		try {
-			// Ladataan ääni resurssina
-			URL soundUrl = getClass().getResource("/laughter.wav");
+			// Ladataan satunnainen ääni resurssina
+			URL soundUrl = getClass().getResource("/" + sounds[index]);
+			System.out.println("mika aani: "+ soundUrl);
 			if (soundUrl == null) {
 				System.out.println("Sound file not found!");
 				return;
