@@ -69,7 +69,7 @@ public class GuiltTripperPlugin extends Plugin {
 					});
 				}
 			}
-		}, 15 * 60 * 1000, 15 * 60 * 1000); // 10 seconds
+		}, 15 * 60 * 1000, 15 * 60 * 1000); // 15 min
 	}
 
 	@Override
