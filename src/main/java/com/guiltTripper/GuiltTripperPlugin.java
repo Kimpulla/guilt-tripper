@@ -5,21 +5,33 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+
+import javax.sound.sampled.FloatControl;
+
+
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+import java.net.URL;
 
 @Slf4j
 @PluginDescriptor(
 		name = "Guilt Tripper"
 )
-public class GuiltTripperPlugin extends Plugin
-{
+public class GuiltTripperPlugin extends Plugin {
 	@Inject
 	private Client client;
 
@@ -47,8 +59,7 @@ public class GuiltTripperPlugin extends Plugin
 	private Timer timer;
 
 	@Override
-	protected void startUp() throws Exception
-	{
+	protected void startUp() throws Exception {
 		System.out.println("Guilt Tripper started!");
 		startTimer();
 	}
@@ -61,16 +72,18 @@ public class GuiltTripperPlugin extends Plugin
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				if (client.getGameState() == net.runelite.api.GameState.LOGGED_IN) {
-					clientThread.invokeLater(() -> printRandomMessage());
+				if (client.getGameState() == GameState.LOGGED_IN) {
+					clientThread.invokeLater(() -> {
+						printRandomMessage();
+						playSound();
+					});
 				}
 			}
 		}, 0, 10 * 1000); // 10 seconds
 	}
 
 	@Override
-	protected void shutDown() throws Exception
-	{
+	protected void shutDown() throws Exception {
 		System.out.println("Guilt Tripper stopped!");
 		if (timer != null) {
 			timer.cancel();
@@ -78,9 +91,8 @@ public class GuiltTripperPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onGameStateChanged(net.runelite.api.events.GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == net.runelite.api.GameState.LOGGED_IN) {
+	public void onGameStateChanged(GameStateChanged gameStateChanged) {
+		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
 			printRandomMessage();
 			startTimer();
 		}
@@ -91,9 +103,45 @@ public class GuiltTripperPlugin extends Plugin
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", randomMessage, null);
 	}
 
+	private Clip clip = null;
+
+	private void playSound() {
+		if (clip != null) {
+			clip.close();
+			clip = null;  // Aseta clip nulliksi suljetun klipin jälkeen
+		}
+		try {
+			// Ladataan ääni resurssina
+			URL soundUrl = getClass().getResource("/laughter.wav");
+			System.out.println("URL ON TASSA: " + soundUrl);
+			if (soundUrl == null) {
+				System.out.println("Sound file not found!");
+				return;
+			}
+			try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl)) {
+				clip = AudioSystem.getClip();
+				clip.open(audioIn);
+				setVolume(clip, 80); // Voit säätää äänenvoimakkuuden konfiguraation mukaan
+				clip.start();
+			}
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			System.out.println("Error playing sound:" + e.getMessage());
+		}
+	}
+
+	// Apumetodi äänenvoimakkuuden asettamiseksi
+	private void setVolume(Clip clip, int volume) {
+		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		float dB = (float) (Math.log(volume / 100.0) / Math.log(10.0) * 20.0);
+		gainControl.setValue(dB);
+	}
+
+
+
+
+
 	@Provides
-	GuiltTripperConfig provideConfig(ConfigManager configManager)
-	{
+	GuiltTripperConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(GuiltTripperConfig.class);
 	}
 }
