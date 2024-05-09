@@ -75,11 +75,13 @@ public class GuiltTripperPlugin extends Plugin {
 				if (client.getGameState() == GameState.LOGGED_IN) {
 					clientThread.invokeLater(() -> {
 						printRandomMessage();
-						playSound();
+						if (config.allowSound()) {
+							playSound();
+						}
 					});
 				}
 			}
-		}, 0, 10 * 1000); // 10 seconds
+		}, 10 * 1000, 10 * 1000); // 10 seconds
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class GuiltTripperPlugin extends Plugin {
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
-			printRandomMessage();
+			printSpecificMessage("Take the following message with a grain of salt...");
 			startTimer();
 		}
 	}
@@ -101,6 +103,10 @@ public class GuiltTripperPlugin extends Plugin {
 	private void printRandomMessage() {
 		String randomMessage = "<col=ff0000>" + messages[random.nextInt(messages.length)] + "</col>";
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", randomMessage, null);
+	}
+
+	private void printSpecificMessage(String message) {
+		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>" + message + "</col>", null);
 	}
 
 	private Clip clip = null;
