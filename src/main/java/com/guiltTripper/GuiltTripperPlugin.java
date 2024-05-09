@@ -105,7 +105,12 @@ public class GuiltTripperPlugin extends Plugin {
 
 	private Clip clip = null;
 
+	// TODO: LISÄÄ ÄÄNIÄ
 	private void playSound() {
+		if (!config.allowSound()) {  // Tarkista, ovatko äänet sallittuja
+			return;  // Jos ei, lopeta metodi tässä
+		}
+
 		if (clip != null) {
 			clip.close();
 			clip = null;  // Aseta clip nulliksi suljetun klipin jälkeen
@@ -113,7 +118,6 @@ public class GuiltTripperPlugin extends Plugin {
 		try {
 			// Ladataan ääni resurssina
 			URL soundUrl = getClass().getResource("/laughter.wav");
-			System.out.println("URL ON TASSA: " + soundUrl);
 			if (soundUrl == null) {
 				System.out.println("Sound file not found!");
 				return;
@@ -121,7 +125,7 @@ public class GuiltTripperPlugin extends Plugin {
 			try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl)) {
 				clip = AudioSystem.getClip();
 				clip.open(audioIn);
-				setVolume(clip, 80); // Voit säätää äänenvoimakkuuden konfiguraation mukaan
+				setVolume(clip, config.soundVolume()); // Käytä konfiguraation äänenvoimakkuutta
 				clip.start();
 			}
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -129,12 +133,26 @@ public class GuiltTripperPlugin extends Plugin {
 		}
 	}
 
+
 	// Apumetodi äänenvoimakkuuden asettamiseksi
 	private void setVolume(Clip clip, int volume) {
+		if (volume < 0 || volume > 100) {
+			throw new IllegalArgumentException("Volume must be between 0 and 100");
+		}
+
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		float dB = (float) (Math.log(volume / 100.0) / Math.log(10.0) * 20.0);
-		gainControl.setValue(dB);
+		float minDb = gainControl.getMinimum(); // esim. -80 dB tai vastaava
+		float maxDb = gainControl.getMaximum(); // +6.0206 dB
+
+		// Lasketaan dB arvo lineaarisesti volume prosentin perusteella
+		float gain = ((maxDb - minDb) * (volume / 100.0f)) + minDb;
+		gainControl.setValue(gain);
+
+		System.out.println("Volume set to " + volume + "% (" + gain + " dB)");
 	}
+
+
+
 
 
 
