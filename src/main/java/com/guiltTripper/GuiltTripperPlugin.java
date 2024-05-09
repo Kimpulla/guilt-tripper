@@ -41,19 +41,7 @@ public class GuiltTripperPlugin extends Plugin {
 	@Inject
 	private GuiltTripperConfig config;
 
-	private final String[] messages = {
-			"Touch grass!",
-			"Go level up in daylight skills!",
-			"Have you tried the breathing skill outside?",
-			"Your chair called. It wants a relationship break.",
-			"Maybe it’s time to grind some real-life quests?",
-			"Even a goblin has better social skills!",
-			"I bet even a rock crab walks more than you.",
-			"Time to logout and log into reality!",
-			"Have you considered leveling up offline?",
-			"Get some sunlight, you're not a cave slime!",
-			"Even your pet's on a more balanced diet. Time for a walk?"
-	};
+	private final String[] messages = GuiltTripperMessages.MESSAGES;
 
 	private final Random random = new Random();
 	private Timer timer;
