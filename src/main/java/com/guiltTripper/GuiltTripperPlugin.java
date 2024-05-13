@@ -3,10 +3,12 @@ package com.guiltTripper;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.AnimationID;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.NPC;
+import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.client.callback.ClientThread;
@@ -15,19 +17,12 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
 
 @Slf4j
 @PluginDescriptor(
@@ -36,6 +31,8 @@ import java.util.TimerTask;
 public class GuiltTripperPlugin extends Plugin {
 	@Inject
 	private Client client;
+
+	private GameState lastGameState = null;
 
 	@Inject
 	private ClientThread clientThread;
@@ -47,6 +44,7 @@ public class GuiltTripperPlugin extends Plugin {
 	private final Random random = new Random();
 	private Timer timer;
 	private Clip clip = null;
+	private boolean isPlaying = false;
 
 	@Override
 	protected void startUp() throws Exception {
@@ -82,12 +80,12 @@ public class GuiltTripperPlugin extends Plugin {
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
+		if (gameStateChanged.getGameState() == GameState.LOGGED_IN && lastGameState == GameState.LOGIN_SCREEN) {
 			printDefaultMessages("Take the following message with a grain of salt...");
 			startTimer();
 		}
+		lastGameState = gameStateChanged.getGameState();
 	}
-
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned event) {
 		NPC npc = event.getNpc();
@@ -109,7 +107,19 @@ public class GuiltTripperPlugin extends Plugin {
 		}
 	}
 
-
+	@Subscribe
+	public void onAnimationChanged(AnimationChanged animationChanged) {
+		if (client.getGameState() == GameState.LOGGED_IN
+				&& client.getLocalPlayer() != null
+				&& client.getLocalPlayer().getHealthRatio() == 0
+				&& client.getLocalPlayer().getAnimation() == AnimationID.DEATH) {
+			clientThread.invokeLater(() -> {
+				if (config.allowSound()) {
+					playDeathSound();
+				}
+			});
+		}
+	}
 
 	private void printRandomMessage() {
 		String randomMessage = "<col=00ff00>" + messages[random.nextInt(messages.length)] + "</col>";
@@ -151,6 +161,42 @@ public class GuiltTripperPlugin extends Plugin {
 			}
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			System.out.println("Error playing sound:" + e.getMessage());
+		}
+	}
+
+	private void playDeathSound() {
+		if (isPlaying) {
+			System.out.println("Already playing");
+			return;
+		}
+
+		System.out.println("Playing death sound");
+
+		if (clip != null) {
+			clip.close();
+		}
+
+		try {
+			URL soundUrl = getClass().getResource("/deathsound.wav");
+			if (soundUrl == null) {
+				System.out.println("Death sound file not found!");
+				return;
+			}
+			try (AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundUrl)) {
+				clip = AudioSystem.getClip();
+				clip.open(inputStream);
+				setVolume(clip, config.soundVolume());
+				clip.start();
+				isPlaying = true;
+				clip.addLineListener(e -> {
+					if (e.getType() == LineEvent.Type.STOP) {
+						isPlaying = false;
+						System.out.println("Done playing death sound");
+					}
+				});
+			}
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			System.out.println("Unable to play death sound: " + e);
 		}
 	}
 
