@@ -12,6 +12,7 @@ The plugin uses the following sounds in its notifications:
 - trumpet.wav: https://pixabay.com/sound-effects/silly-trumpet-5-187805/
 - ba-dum-tishh.wav: https://pixabay.com/sound-effects/ba-dum-tishh-remix-88031/
 - ooouuh.wav: https://pixabay.com/sound-effects/funny-reaction-120318/
+- deathsound.wav: https://pixabay.com/sound-effects/wah-wah-sad-trombone-6347/
 
 If you want to add new sounds or modify existing ones, you can find them here: [link to sound files]
 
