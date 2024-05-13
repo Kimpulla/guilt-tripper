@@ -33,6 +33,7 @@ public class GuiltTripperPlugin extends Plugin {
 	private Client client;
 
 	private GameState lastGameState = null;
+	private boolean isFirstLogin = true;
 
 	@Inject
 	private ClientThread clientThread;
@@ -80,12 +81,21 @@ public class GuiltTripperPlugin extends Plugin {
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN && lastGameState == GameState.LOGIN_SCREEN) {
-			printDefaultMessages("Take the following message with a grain of salt...");
-			startTimer();
+		System.out.println("Current game state: " + gameStateChanged.getGameState());
+		System.out.println("Last game state: " + lastGameState);
+
+		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
+			if (lastGameState == GameState.LOADING && isFirstLogin) {
+				printDefaultMessages("Take the following message with a grain of salt...");
+				startTimer();
+				isFirstLogin = false; // set to false after first login
+			} else if (lastGameState != GameState.LOADING) {
+				isFirstLogin = true;
+			}
 		}
 		lastGameState = gameStateChanged.getGameState();
 	}
+
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned event) {
 		NPC npc = event.getNpc();
@@ -122,7 +132,7 @@ public class GuiltTripperPlugin extends Plugin {
 	}
 
 	private void printRandomMessage() {
-		String randomMessage = "<col=00ff00>" + messages[random.nextInt(messages.length)] + "</col>";
+		String randomMessage = "<col=008000>" + messages[random.nextInt(messages.length)] + "</col>";
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", randomMessage, null);
 	}
 
