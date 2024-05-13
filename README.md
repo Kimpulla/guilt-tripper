@@ -14,7 +14,7 @@ The plugin uses the following sounds in its notifications:
 - ooouuh.wav: https://pixabay.com/sound-effects/funny-reaction-120318/
 - deathsound.wav: https://pixabay.com/sound-effects/wah-wah-sad-trombone-6347/
 
-If you want to add new sounds or modify existing ones, you can find them here: [link to sound files]
+To incorporate new sounds, replace the existing ones while retaining the sound names specified above. Ensure that the sound effects are in WAV format.
 
 ## Installation (not available at the moment)
 
@@ -33,7 +33,7 @@ Once Guilt Tripper is installed and enabled, it will randomly send messages to t
 If you want to add your own sounds or modify the existing ones, follow these instructions:
 
 1. Download the desired audio files and ensure they are in WAV format.
-2. Move the audio files to the Guilt Tripper plugins "resources" folder.
+2. Replace one of the existing sound effects in the Guilt Tripper plugins "resources" folder, ensuring to retain the original file name.
 3. Restart Runelite to ensure the sounds are updated correctly.
 
 ## Development
@@ -46,7 +46,7 @@ If you want to contribute to the development of the plugin, you can do so by fol
 
 ## Troubleshooting
 
-If you encounter any issues or have questions, you can open an [issue on GitHub].
+If you encounter any issues or have questions, you can open an [issue on GitHub](https://github.com/Kimpulla/guilt-tripper/issues).
 
 ## License
 
