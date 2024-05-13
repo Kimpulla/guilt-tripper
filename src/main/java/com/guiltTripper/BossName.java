@@ -23,7 +23,6 @@ public class BossName {
         NPC_NAMES.add("Duke Sucellus");
         NPC_NAMES.add("General Graardor");
         NPC_NAMES.add("Giant Mole");
-        NPC_NAMES.add("Goblin");
         NPC_NAMES.add("Dusk");
         NPC_NAMES.add("Kalphite Queen");
         NPC_NAMES.add("King Black Dragon");
@@ -51,5 +50,6 @@ public class BossName {
         NPC_NAMES.add("Zalcano");
         NPC_NAMES.add("Zulrah");
         NPC_NAMES.add("Calvar'ion");
+
     }
 }
