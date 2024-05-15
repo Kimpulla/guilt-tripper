@@ -16,7 +16,7 @@ All sound effects used in this project are my original creations.
 
 To incorporate new sounds, replace the existing ones while retaining the sound names specified above. Ensure that the sound effects are in WAV format.
 
-## Installation (not available at the moment)
+## Installation
 
 1. Open Runelite.
 2. Open the plugin configuration panel.
