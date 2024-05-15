@@ -20,7 +20,6 @@ public class GuiltTripperMessages {
             "If AFK were a skill tree, you'd be maxed out.",
             "In it for the achievements, or just to rage-quit?",
             "Enjoying the grind or just grinding your teeth?",
-            "Achievement hunter or just hunting for the exit?",
-            "Have you heard about hypeks? Me neither."
+            "Achievement hunter or just hunting for the exit?"
     };
 }
