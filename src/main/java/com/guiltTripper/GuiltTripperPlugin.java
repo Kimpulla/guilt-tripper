@@ -69,7 +69,7 @@ public class GuiltTripperPlugin extends Plugin {
 					});
 				}
 			}
-		}, 15 * 60 * 1000, 15 * 60 * 1000);
+		}, 30 * 60 * 1000, 30 * 60 * 1000);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class GuiltTripperPlugin extends Plugin {
 					@Override
 					public void run() {
 						clientThread.invokeLater(() -> {
-							printSpecificMessage("Turns out it was just a lost kitten.");
+							printSpecificMessage("Turns out it was just a lost kitten. -Guilt Tripper");
 						});
 					}
 				}, 5000);
@@ -154,7 +154,7 @@ public class GuiltTripperPlugin extends Plugin {
 			clip = null;
 		}
 
-		String[] sounds = {"laughter.wav", "ba-dum-tishh.wav", "oldman.wav", "ooouuh.wav", "sneeze.wav", "trumpet.wav"};
+		String[] sounds = {"laughter.wav", "gz.wav", "ohmydays.wav", "sleep.wav"};
 		int index = random.nextInt(sounds.length);
 
 		try {
