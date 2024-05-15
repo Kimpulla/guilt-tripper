@@ -50,6 +50,5 @@ public class BossName {
         NPC_NAMES.add("Zalcano");
         NPC_NAMES.add("Zulrah");
         NPC_NAMES.add("Calvar'ion");
-
     }
 }
