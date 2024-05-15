@@ -6,13 +6,13 @@ Guilt Tripper is a Runelite plugin designed for Old School Runescape, adding a u
 
 The plugin uses the following sounds in its notifications:
 
-- oldman.wav: https://pixabay.com/sound-effects/grumpy-old-man-89761/
-- laughter.wav: https://pixabay.com/sound-effects/3-155949/
-- sneeze.wav: https://pixabay.com/sound-effects/sneeze-ac-3-90824/
-- trumpet.wav: https://pixabay.com/sound-effects/silly-trumpet-5-187805/
-- ba-dum-tishh.wav: https://pixabay.com/sound-effects/ba-dum-tishh-remix-88031/
-- ooouuh.wav: https://pixabay.com/sound-effects/funny-reaction-120318/
-- deathsound.wav: https://pixabay.com/sound-effects/wah-wah-sad-trombone-6347/
+- gz.wav
+- laughter.wav
+- ohmydays,wav
+- sleep.wav
+- deathsound.wav
+
+All sound effects used in this project are my original creations.
 
 To incorporate new sounds, replace the existing ones while retaining the sound names specified above. Ensure that the sound effects are in WAV format.
 
