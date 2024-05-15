@@ -18,11 +18,12 @@ To incorporate new sounds, replace the existing ones while retaining the sound n
 
 ## Installation (not available at the moment)
 
-1. Download the Guilt Tripper Plugin from the Runelite GitHub page.
-2. Open Runelite and navigate to the settings.
-3. Select "Plugins" and click "Browse plugins".
-4. Navigate to the downloaded Guilt Tripper plugin folder and select it.
-5. The plugin should now appear in the list of installed plugins. You can enable it by selecting it.
+1. Open Runelite.
+2. Open the plugin configuration panel.
+3. Click the plug icon on the top right of the panel.
+4. Find the plugin you want, and click the install button.
+
+More detailed instructions can be found: [information about the plugin](https://github.com/runelite/runelite/wiki/Information-about-the-Plugin-Hub)
 
 ## Usage
 
