@@ -6,17 +6,17 @@ Guilt Tripper is a Runelite plugin designed for Old School Runescape, adding a u
 
 The plugin uses the following sounds in its notifications:
 
-- oldman.wav: https://pixabay.com/sound-effects/grumpy-old-man-89761/
-- laughter.wav: https://pixabay.com/sound-effects/3-155949/
-- sneeze.wav: https://pixabay.com/sound-effects/sneeze-ac-3-90824/
-- trumpet.wav: https://pixabay.com/sound-effects/silly-trumpet-5-187805/
-- ba-dum-tishh.wav: https://pixabay.com/sound-effects/ba-dum-tishh-remix-88031/
-- ooouuh.wav: https://pixabay.com/sound-effects/funny-reaction-120318/
-- deathsound.wav: https://pixabay.com/sound-effects/wah-wah-sad-trombone-6347/
+- gz.wav
+- laughter.wav
+- ohmydays.wav
+- sleep.wav
+- deathsound.wav
+
+All sound effects used in this project are my original creations.
 
 To incorporate new sounds, replace the existing ones while retaining the sound names specified above. Ensure that the sound effects are in WAV format.
 
-## Installation (not available at the moment)
+## Installation
 
 1. Open Runelite.
 2. Open the plugin configuration panel.
@@ -27,7 +27,11 @@ More detailed instructions can be found: [information about the plugin](https://
 
 ## Usage
 
-Once Guilt Tripper is installed and enabled, it will randomly send messages to the player during the game. Users have the option to enable or disable sound notifications. Additionally, there is a volume control feature available for adjusting the sound volume according to personal preference.
+Once Guilt Tripper is installed and enabled, it will send a random message to the player every 30 minutes, accompanied by a sound effect. Additionally, a sound effect will play when the player dies.
+
+The plugin also features a fun aspect: it includes the drop rates of various boss pets. For example, if there is a 1/3000 chance of obtaining a pet from Kraken, there is a 1/3000 chance that the plugin will announce something funny in the chat.
+
+Users have the option to enable or disable sound notifications. Additionally, there is a volume control feature available for adjusting the sound volume according to personal preference.
 
 ## Instructions for Adding Sounds
 
