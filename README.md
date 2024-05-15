@@ -8,7 +8,7 @@ The plugin uses the following sounds in its notifications:
 
 - gz.wav
 - laughter.wav
-- ohmydays,wav
+- ohmydays.wav
 - sleep.wav
 - deathsound.wav
 
