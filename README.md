@@ -27,7 +27,11 @@ More detailed instructions can be found: [information about the plugin](https://
 
 ## Usage
 
-Once Guilt Tripper is installed and enabled, it will randomly send messages to the player during the game. Users have the option to enable or disable sound notifications. Additionally, there is a volume control feature available for adjusting the sound volume according to personal preference.
+Once Guilt Tripper is installed and enabled, it will send a random message to the player every 30 minutes, accompanied by a sound effect. Additionally, a sound effect will play when the player dies.
+
+The plugin also features a fun aspect: it includes the drop rates of various boss pets. For example, if there is a 1/3000 chance of obtaining a pet from Kraken, there is a 1/3000 chance that the plugin will announce something funny in the chat.
+
+Users have the option to enable or disable sound notifications. Additionally, there is a volume control feature available for adjusting the sound volume according to personal preference.
 
 ## Instructions for Adding Sounds
 
