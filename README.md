@@ -1,6 +1,6 @@
 # Guilt Tripper - Runelite Plugin
 
-Guilt Tripper is a Runelite plugin designed for Runescape, adding a unique twist to the gaming experience. This plugin periodically sends messages to players, humorously "accusing" them of playing too much and suggesting they take a break. And much more!
+Guilt Tripper is a Runelite plugin designed for Old School Runescape, adding a unique twist to the gaming experience. This plugin periodically sends messages to players, humorously "accusing" them of playing too much and suggesting they take a break. And much more!
 
 ## Used Sounds
 
@@ -14,15 +14,16 @@ The plugin uses the following sounds in its notifications:
 - ooouuh.wav: https://pixabay.com/sound-effects/funny-reaction-120318/
 - deathsound.wav: https://pixabay.com/sound-effects/wah-wah-sad-trombone-6347/
 
-If you want to add new sounds or modify existing ones, you can find them here: [link to sound files]
+To incorporate new sounds, replace the existing ones while retaining the sound names specified above. Ensure that the sound effects are in WAV format.
 
 ## Installation (not available at the moment)
 
-1. Download the Guilt Tripper Plugin from the Runelite GitHub page.
-2. Open Runelite and navigate to the settings.
-3. Select "Plugins" and click "Browse plugins".
-4. Navigate to the downloaded Guilt Tripper plugin folder and select it.
-5. The plugin should now appear in the list of installed plugins. You can enable it by selecting it.
+1. Open Runelite.
+2. Open the plugin configuration panel.
+3. Click the plug icon on the top right of the panel.
+4. Find the plugin you want, and click the install button.
+
+More detailed instructions can be found: [information about the plugin](https://github.com/runelite/runelite/wiki/Information-about-the-Plugin-Hub)
 
 ## Usage
 
@@ -33,7 +34,7 @@ Once Guilt Tripper is installed and enabled, it will randomly send messages to t
 If you want to add your own sounds or modify the existing ones, follow these instructions:
 
 1. Download the desired audio files and ensure they are in WAV format.
-2. Move the audio files to the Guilt Tripper plugins "resources" folder.
+2. Replace one of the existing sound effects in the Guilt Tripper plugins "resources" folder, ensuring to retain the original file name.
 3. Restart Runelite to ensure the sounds are updated correctly.
 
 ## Development
@@ -46,28 +47,4 @@ If you want to contribute to the development of the plugin, you can do so by fol
 
 ## Troubleshooting
 
-If you encounter any issues or have questions, you can open an [issue on GitHub].
-
-## License
-
-MIT License
-
-Copyright (c) [2024] [Kimpulla]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+If you encounter any issues or have questions, you can open an [issue on GitHub](https://github.com/Kimpulla/guilt-tripper/issues).
